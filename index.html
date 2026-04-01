@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baby Sensory – Magical Sensory Play for Babies</title>
+  <meta name="description" content="Baby Sensory is a beautiful, screen-safe sensory app for babies and toddlers. Tap to create ripples, fireworks, balloons, and colorful paintings. Free to download." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky: #0ea5e9;
+      --deep: #1d4ed8;
+      --pink: #f472b6;
+      --purple: #7c3aed;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f172a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: rgba(15,23,42,0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-brand {
+      font-size: 1.3rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .nav-cta {
+      background: linear-gradient(90deg, var(--sky), var(--purple));
+      color: #fff !important;
+      padding: 8px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    /* ── HERO ────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 20px 80px;
+      position: relative;
+      background: radial-gradient(ellipse at 50% 30%, #1d4ed8 0%, #0f172a 70%);
+      overflow: hidden;
+    }
+
+    .hero-emoji {
+      font-size: 90px;
+      line-height: 1;
+      margin-bottom: 24px;
+      animation: pulse-pop 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 40px rgba(14,165,233,0.6));
+    }
+
+    @keyframes pulse-pop {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      background: linear-gradient(90deg, #bae6fd, #fff 40%, #e879f9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      opacity: 0.8;
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--sky), var(--deep));
+      color: #fff;
+      padding: 16px 36px;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 8px 32px rgba(14,165,233,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(14,165,233,0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: #fff;
+      padding: 16px 36px;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover { background: rgba(255,255,255,0.18); }
+
+    /* floating emojis */
+    .floaters {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .floater {
+      position: absolute;
+      font-size: 28px;
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── FEATURES ────────────────────────── */
+    .section {
+      padding: 100px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      font-size: 1.1rem;
+      opacity: 0.65;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.09);
+    }
+
+    .feature-icon { font-size: 52px; margin-bottom: 18px; display: block; }
+    .feature-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+    .feature-card p { font-size: 0.95rem; opacity: 0.7; line-height: 1.65; }
+
+    /* ── SCENES ──────────────────────────── */
+    .scenes-section {
+      padding: 100px 20px;
+      background: radial-gradient(ellipse at 50% 50%, rgba(124,58,237,0.2) 0%, transparent 70%);
+    }
+
+    .scenes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .scene-card {
+      border-radius: 24px;
+      padding: 40px 20px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+      cursor: default;
+    }
+
+    .scene-card:hover { transform: scale(1.04); }
+    .scene-card .s-icon { font-size: 52px; display: block; margin-bottom: 14px; }
+
+    .scene-water { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+    .scene-fireworks { background: linear-gradient(135deg, #f472b6, #7c3aed); }
+    .scene-balloon { background: linear-gradient(135deg, #fb923c, #ef4444); }
+    .scene-paint { background: linear-gradient(135deg, #4ade80, #0891b2); }
+
+    /* ── BENEFITS ────────────────────────── */
+    .benefits-section {
+      padding: 100px 20px;
+    }
+
+    .benefits-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      align-items: flex-start;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .benefits-text {
+      flex: 1 1 340px;
+    }
+
+    .benefits-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+
+    .benefit-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .benefit-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 1rem;
+      opacity: 0.85;
+      line-height: 1.6;
+    }
+
+    .benefit-list li span:first-child {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .benefits-visual {
+      flex: 1 1 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-mock {
+      width: 220px;
+      height: 440px;
+      background: linear-gradient(180deg, #0ea5e9, #0284c7, #1d4ed8);
+      border-radius: 36px;
+      border: 3px solid rgba(255,255,255,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 30px 80px rgba(14,165,233,0.35);
+      position: relative;
+      overflow: hidden;
+      animation: swayPhone 4s ease-in-out infinite;
+    }
+
+    @keyframes swayPhone {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2deg); }
+    }
+
+    .phone-emoji {
+      font-size: 48px;
+      animation: pop 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.9); }
+      to { transform: scale(1.1); }
+    }
+
+    .phone-bubble {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      from { transform: translateY(160px); opacity: 0.5; }
+      to { transform: translateY(-200px); opacity: 0; }
+    }
+
+    /* ── TESTIMONIALS ────────────────────── */
+    .testi-section {
+      padding: 100px 20px;
+      background: radial-gradient(ellipse at 50% 50%, rgba(244,114,182,0.15) 0%, transparent 70%);
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .testi-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .testi-stars { font-size: 1.2rem; margin-bottom: 12px; color: #fbbf24; }
+    .testi-text { font-size: 0.98rem; opacity: 0.85; line-height: 1.7; margin-bottom: 16px; }
+    .testi-author { font-size: 0.9rem; opacity: 0.55; font-weight: 600; }
+
+    /* ── CTA ─────────────────────────────── */
+    .cta-section {
+      padding: 100px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 100%);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      font-size: 1.15rem;
+      opacity: 0.8;
+      margin-bottom: 40px;
+    }
+
+    .store-badges {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 16px;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .badge:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-3px);
+    }
+
+    .badge-icon { font-size: 28px; }
+
+    /* ── FOOTER ──────────────────────────── */
+    footer {
+      background: #0f172a;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 48px 40px 32px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      opacity: 0.5;
+      margin-top: 8px;
+      max-width: 280px;
+      line-height: 1.6;
+    }
+
+    .footer-links h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.45;
+      margin-bottom: 12px;
+    }
+
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: #fff; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      opacity: 0.4;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-brand">🐬 Baby Sensory</div>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#scenes">Scenes</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="privacy-policy.html">Privacy</a></li>
+      <li><a href="#download" class="nav-cta">Download</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="floaters" id="floaters"></div>
+    <div class="hero-emoji">🌊</div>
+    <h1>Magical Play<br>for Little Minds</h1>
+    <p>Baby Sensory turns every tap into a sensory adventure — rippling water, popping balloons, bursting fireworks, and rainbow painting.</p>
+    <div class="hero-btns">
+      <a href="#download" class="btn-primary">📲 Download Free</a>
+      <a href="#scenes" class="btn-secondary">Explore Scenes →</a>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="section-title">
+      <h2>✨ Designed for Babies</h2>
+      <p>Every detail crafted to captivate young eyes and spark development through play.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">👆</span>
+        <h3>Tap-to-Play</h3>
+        <p>Instant tactile feedback — every touch creates a beautiful reaction on screen.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🌈</span>
+        <h3>Bold Colors</h3>
+        <p>High-contrast, vibrant visuals designed to engage and delight baby's developing vision.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔇</span>
+        <h3>No Ads, No Noise</h3>
+        <p>A calm, distraction-free experience. No pop-ups, no autoplay videos, no surprises.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📵</span>
+        <h3>100% Offline</h3>
+        <p>Works anywhere — no Wi-Fi required. Perfect for travel, waiting rooms, or quiet time.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔒</span>
+        <h3>Zero Data</h3>
+        <p>Completely private. No personal data collected, ever. Safe for the whole family.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">⚡</span>
+        <h3>Silky Smooth</h3>
+        <p>60fps animations powered by the Flame engine for buttery-smooth sensory effects.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENES -->
+  <section class="scenes-section" id="scenes">
+    <div class="section-title">
+      <h2>🎮 Four Magical Scenes</h2>
+      <p>Switch between scenes in an instant. Each one is a whole new world to explore.</p>
+    </div>
+    <div class="scenes-grid">
+      <div class="scene-card scene-water">
+        <span class="s-icon">🌊</span>
+        Water Splash
+        <div style="font-size:0.85rem;margin-top:8px;opacity:0.85;font-weight:500;">Tap to make ripples & splashes</div>
+      </div>
+      <div class="scene-card scene-fireworks">
+        <span class="s-icon">🎆</span>
+        Fireworks
+        <div style="font-size:0.85rem;margin-top:8px;opacity:0.85;font-weight:500;">Tap for dazzling bursts of light</div>
+      </div>
+      <div class="scene-card scene-balloon">
+        <span class="s-icon">🎈</span>
+        Balloon Pop
+        <div style="font-size:0.85rem;margin-top:8px;opacity:0.85;font-weight:500;">Pop balloons with every tap</div>
+      </div>
+      <div class="scene-card scene-paint">
+        <span class="s-icon">🎨</span>
+        Color Paint
+        <div style="font-size:0.85rem;margin-top:8px;opacity:0.85;font-weight:500;">Draw rainbows with your finger</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits-section" id="benefits">
+    <div class="benefits-flex">
+      <div class="benefits-text">
+        <h2>Good for Baby,<br>Easy for Parents</h2>
+        <ul class="benefit-list">
+          <li><span>👁️</span><span>Stimulates visual tracking and focus in infants aged 0–3.</span></li>
+          <li><span>🤲</span><span>Encourages hand-eye coordination through satisfying tap interactions.</span></li>
+          <li><span>🧠</span><span>Supports early sensory development with varied colors, shapes, and motion.</span></li>
+          <li><span>😌</span><span>Calming water scene helps soothe and relax fussy babies.</span></li>
+          <li><span>👨‍👩‍👧</span><span>Perfect for bonding — explore the scenes together with your child.</span></li>
+          <li><span>📲</span><span>No setup needed — just open and tap. Works with any finger, even tiny ones.</span></li>
+        </ul>
+      </div>
+      <div class="benefits-visual">
+        <div class="phone-mock" id="phoneMock">
+          <div class="phone-emoji">🐟</div>
+          <div class="phone-emoji" style="animation-delay:0.4s">🐠</div>
+          <div class="phone-emoji" style="animation-delay:0.8s">🫧</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testi-section" id="reviews">
+    <div class="section-title">
+      <h2>💬 Loved by Parents</h2>
+      <p>Families around the world enjoy Baby Sensory together.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"My 4-month-old is completely mesmerized by the water scene. It's the only thing that calms her down! Absolutely love this app."</p>
+        <div class="testi-author">— Sarah M., Mother of 1</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Finally a baby app with no annoying ads or in-app purchases. It's beautiful, simple, and my son can't get enough of the fireworks!"</p>
+        <div class="testi-author">— James K., Dad of 2</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"As a pediatric OT, I recommend this to parents for early sensory stimulation. The bold colors and responsive animations are perfect."</p>
+        <div class="testi-author">— Dr. Priya R., Pediatric OT</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / DOWNLOAD -->
+  <section class="cta-section" id="download">
+    <h2>Ready to begin?<br>Download free today 🎉</h2>
+    <p>Available on iOS and Android. No account needed.</p>
+    <div class="store-badges">
+      <a href="#" class="badge">
+        <span class="badge-icon">🍎</span>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;">Download on the</div>
+          <div>App Store</div>
+        </div>
+      </a>
+      <a href="#" class="badge">
+        <span class="badge-icon">🤖</span>
+        <div>
+          <div style="font-size:0.75rem;opacity:0.7;">Get it on</div>
+          <div>Google Play</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div style="font-size:1.3rem;font-weight:900;">🐬 Baby Sensory</div>
+        <p>A magical sensory playground for babies and toddlers.</p>
+      </div>
+      <div class="footer-links">
+        <h4>App</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#scenes">Scenes</a></li>
+          <li><a href="#download">Download</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Baby Sensory. Made with ❤️ for little ones.</div>
+  </footer>
+
+  <script>
+    // Floating emojis in hero
+    const floaterEl = document.getElementById('floaters');
+    const heroEmojis = ['🐟','🐠','🐬','💧','🌊','🫧','🦑','🐙','🦀','⭐','✨'];
+    for (let i = 0; i < 20; i++) {
+      const el = document.createElement('div');
+      el.className = 'floater';
+      el.textContent = heroEmojis[Math.floor(Math.random() * heroEmojis.length)];
+      el.style.cssText = `
+        left: ${Math.random() * 100}%;
+        bottom: ${-10 + Math.random() * 20}%;
+        animation-duration: ${6 + Math.random() * 8}s;
+        animation-delay: ${Math.random() * 8}s;
+        font-size: ${16 + Math.random() * 24}px;
+      `;
+      floaterEl.appendChild(el);
+    }
+
+    // Bubbles in phone mock
+    const mock = document.getElementById('phoneMock');
+    for (let i = 0; i < 6; i++) {
+      const b = document.createElement('div');
+      b.className = 'phone-bubble';
+      const size = 8 + Math.random() * 18;
+      b.style.cssText = `
+        width:${size}px; height:${size}px;
+        left:${10 + Math.random() * 80}%;
+        animation-duration:${2 + Math.random() * 3}s;
+        animation-delay:${Math.random() * 3}s;
+      `;
+      mock.appendChild(b);
+    }
+  </script>
+</body>
+</html>
