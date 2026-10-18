@@ -1,280 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Support – Baby Sensory</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #f472b6 0%, #a855f7 50%, #7c3aed 100%);
-      min-height: 100vh;
-      color: #fff;
-    }
-
-    header {
-      text-align: center;
-      padding: 60px 20px 40px;
-    }
-
-    .logo {
-      font-size: 64px;
-      display: block;
-      margin-bottom: 12px;
-      animation: bounce 2s ease-in-out infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-12px) scale(1.05); }
-    }
-
-    header h1 {
-      font-size: 2.6rem;
-      font-weight: 900;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.25);
-    }
-
-    header p {
-      margin-top: 10px;
-      font-size: 1.1rem;
-      opacity: 0.85;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      padding: 0 20px 40px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: rgba(255,255,255,0.85);
-      text-decoration: none;
-      font-size: 0.95rem;
-      padding: 8px 20px;
-      border: 1.5px solid rgba(255,255,255,0.4);
-      border-radius: 999px;
-      transition: background 0.2s;
-    }
-
-    nav a:hover, nav a.active {
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-    }
-
-    main {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 20px 80px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 24px;
-      padding: 36px 40px;
-      backdrop-filter: blur(12px);
-      margin-bottom: 24px;
-    }
-
-    .card h2 {
-      font-size: 1.4rem;
-      font-weight: 800;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .card p, .card li {
-      font-size: 1rem;
-      line-height: 1.75;
-      opacity: 0.9;
-    }
-
-    .faq-item {
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      padding: 16px 0;
-    }
-
-    .faq-item:last-child { border-bottom: none; }
-
-    .faq-question {
-      font-weight: 700;
-      font-size: 1.05rem;
-      margin-bottom: 6px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .faq-answer {
-      font-size: 0.98rem;
-      opacity: 0.85;
-      line-height: 1.7;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-top: 8px;
-    }
-
-    .contact-item {
-      background: rgba(255,255,255,0.15);
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      text-decoration: none;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    .contact-item:hover {
-      background: rgba(255,255,255,0.25);
-      transform: translateY(-2px);
-    }
-
-    .contact-item .ci-icon { font-size: 36px; }
-    .contact-item .ci-label { font-weight: 700; font-size: 1rem; }
-    .contact-item .ci-sub { font-size: 0.85rem; opacity: 0.75; }
-
-    footer {
-      text-align: center;
-      padding: 32px 20px;
-      opacity: 0.6;
-      font-size: 0.9rem;
-    }
-
-    .sparkle {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .star {
-      position: absolute;
-      font-size: 20px;
-      animation: twinkle linear infinite;
-      opacity: 0;
-    }
-
-    @keyframes twinkle {
-      0% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 0.7; transform: scale(1.2); }
-      100% { opacity: 0; transform: scale(0.5); }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support – Little Wooden Puzzles</title>
+  <meta name="description" content="Help and contact for the Little Wooden Puzzles app.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <div class="sparkle" id="sparkle" aria-hidden="true"></div>
-
+<main>
   <header>
-    <span class="logo">🎈</span>
-    <h1>Baby Sensory</h1>
-    <p>Support Center</p>
+    <img src="icon.png" alt="">
+    <div>
+      <h1>Support</h1>
+      <p>Little Wooden Puzzles</p>
+    </div>
   </header>
 
+  <div class="card">
+    <h2>Need help?</h2>
+    <p>Email <a href="mailto:joellemahfoud23@gmail.com?subject=Little%20Wooden%20Puzzles">joellemahfoud23@gmail.com</a> and we’ll get back to you as soon as we can. It helps to mention your device model and iOS version.</p>
+  </div>
+
+  <h2>Frequently asked questions</h2>
+
+  <h3>What’s free and what’s paid?</h3>
+  <p>The first 5 puzzles are free. A single one-time purchase unlocks all 100 puzzles for good, with no subscription and no ads.</p>
+
+  <h3>How do I unlock every puzzle?</h3>
+  <p>Tap any puzzle after the first five and answer the grown-up question. Then tap <strong>Unlock</strong> and confirm with your Apple ID.</p>
+
+  <h3>I already paid. How do I get my puzzles back on a new device?</h3>
+  <p>Sign in with the same Apple ID you bought with. Tap a locked puzzle, answer the grown-up question, then tap <strong>Restore purchase</strong>. You won’t be charged again.</p>
+
+  <h3>How do I turn the music off?</h3>
+  <p>Tap the music note button in the top-left corner of the map. The app remembers your choice.</p>
+
+  <h3>How do I turn hints on or off?</h3>
+  <p>While playing a puzzle, tap the lightbulb button. With hints on, the game gently shows where a piece goes if your child pauses.</p>
+
+  <h3>Where are the grown-up settings?</h3>
+  <p>On the map, press and hold the top-right corner. From there you can let your child play the puzzles in any order, start over, or unlock every puzzle.</p>
+
+  <h3>How do I ask for a refund?</h3>
+  <p>Refunds are handled by Apple. Visit <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>, sign in, and choose the purchase.</p>
+
+  <h3>Does the app collect any data?</h3>
+  <p>No. There are no ads, no analytics and no tracking. See our <a href="privacy.html">Privacy Policy</a>.</p>
+
+  <p class="muted">Developer: Joelle Mahfoud</p>
+
   <nav>
-    <a href="index.html">Home</a>
-    <a href="privacy-policy.html">Privacy</a>
-    <a href="support.html" class="active">Support</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy Policy</a>
   </nav>
-
-  <main>
-    <div class="card">
-      <h2>👋 How Can We Help?</h2>
-      <p>We're here to make sure you and your little one have the best possible experience with Baby Sensory. Browse the FAQs below or reach out to us directly.</p>
-    </div>
-
-    <div class="card">
-      <h2>❓ Frequently Asked Questions</h2>
-      <div class="faq-item">
-        <div class="faq-question">What age is Baby Sensory for?</div>
-        <div class="faq-answer">Baby Sensory is designed for babies and toddlers from 0–3 years old, under parental supervision. The bold visuals and sounds are especially engaging for very young infants.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Does the app work offline?</div>
-        <div class="faq-answer">Yes! Baby Sensory works completely offline. No internet connection is needed to play.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Is Baby Sensory free?</div>
-        <div class="faq-answer">Baby Sensory is free to download with all core scenes included. There are no subscriptions or in-app purchases.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">How do I switch between scenes?</div>
-        <div class="faq-answer">Tap the menu button (⊞) in the top-right corner of the screen to open the scene selection menu. Choose any scene to switch instantly.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">My app is crashing. What should I do?</div>
-        <div class="faq-answer">Try closing and re-opening the app. If the issue persists, please restart your device. For ongoing issues, contact us with your device model and OS version.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Does the app collect any data?</div>
-        <div class="faq-answer">No. Baby Sensory collects zero personal data. See our <a href="privacy-policy.html" style="color:#fff;font-weight:700;">Privacy Policy</a> for full details.</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>✉️ Get in Touch</h2>
-      <p style="margin-bottom:20px;">Can't find your answer above? We'd love to hear from you.</p>
-      <div class="contact-grid">
-        <a class="contact-item" href="mailto:joelle.mahfoud@lau.edu">
-          <span class="ci-icon">📧</span>
-          <span class="ci-label">Email Us</span>
-          <span class="ci-sub">joelle.mahfoud@lau.edu</span>
-        </a>
-        <a class="contact-item" href="#">
-          <span class="ci-icon">🐦</span>
-          <span class="ci-label">Twitter / X</span>
-          <span class="ci-sub">@BabySensoryApp</span>
-        </a>
-        <a class="contact-item" href="#">
-          <span class="ci-icon">📱</span>
-          <span class="ci-label">Leave a Review</span>
-          <span class="ci-sub">App Store / Google Play</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>⏱️ Response Time</h2>
-      <p>We aim to respond to all support requests within <strong>1–2 business days</strong>. Your feedback helps us make Baby Sensory better for every family!</p>
-    </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2026 Baby Sensory. All rights reserved.</p>
-  </footer>
-
-  <script>
-    const sparkle = document.getElementById('sparkle');
-    const emojis = ['⭐', '✨', '🌟', '💫'];
-    for (let i = 0; i < 18; i++) {
-      const s = document.createElement('div');
-      s.className = 'star';
-      s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      s.style.cssText = `
-        left: ${Math.random() * 100}%;
-        top: ${Math.random() * 100}%;
-        animation-duration: ${2 + Math.random() * 4}s;
-        animation-delay: ${Math.random() * 5}s;
-        font-size: ${14 + Math.random() * 20}px;
-      `;
-      sparkle.appendChild(s);
-    }
-  </script>
+</main>
 </body>
 </html>
